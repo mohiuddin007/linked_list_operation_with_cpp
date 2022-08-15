@@ -378,8 +378,7 @@ int main(){
             break;
         default:
             break;
-        }
-        
+        }        
         cout<<"Next Choice: ";
         cin>>choice;
     }
