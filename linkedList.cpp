@@ -228,15 +228,45 @@ void deletionByValueUniqueList(Node* &head, int value){
         //delete the node at the position
         deletionAtSpecificPosition(head, position);
     }
-
 }
+
+Node* reverseNonRecursive (Node* &head){
+    Node* prev = NULL;
+    Node* current = head;
+    if(head==NULL){
+        cout<<"the linked list is empty"<<endl;
+        return head;
+    }
+    Node* next = head->Next;
+
+    while(true){
+        current->Next = prev;
+        prev=current;
+        current = next;
+        if(current == NULL) break;
+        next = next->Next;
+    }
+   return prev;
+}
+
+Node* reverseRecursive(Node* &head){
+    //base call
+    if(head == NULL || head->Next == NULL){
+        if(head == NULL) cout<<"the linked list is empty"<<endl;
+        return head;
+    }
+    //recursive call
+    Node* newHead = reverseRecursive(head->Next);
+    newHead->Next->Next = head;
+    head->Next = NULL;
+
+    return newHead;
+}
+
 int main(){
     Node* head = NULL;
     
     int value, position;
-    //choice 1: insertion at head
-    //choice 2: insertion at tail
-    //choice 3: insertion at certain position
     cout<<"Choice 1: Insertion at Head"<< endl 
     <<"Choice 2: Insertion at Tail" << endl 
     << "Choice 3: insertion at certain position"<<endl
@@ -248,6 +278,8 @@ int main(){
     << "Choice 9: Deletion at Tail"<<endl
     << "Choice 10: Deletion at Specific position"<<endl
     << "Choice 11: Deletion Value(unique list)"<<endl
+    << "Choice 12: Reverse a linked list (Non Recursive)"<<endl
+    << "Choice 13: Reverse a linked list (Recursive)"<<endl
     << "Choice 0: Exit"<<endl;
     int choice = 2;
     while(choice != 0){
@@ -334,6 +366,14 @@ int main(){
             cin>>delValue; 
             deletionByValueUniqueList(head, delValue);
             cout<<endl;
+            display(head);
+            break;
+        case 12:
+            head = reverseNonRecursive(head);
+            display(head);
+            break;
+        case 13:
+            head = reverseRecursive(head);
             display(head);
             break;
         default:
