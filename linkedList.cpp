@@ -306,6 +306,27 @@ bool detectCycle (Node* &head){
     return false;
 }
 
+void removeCycle(Node* &head){
+    Node* slow = head;
+    Node* fast = head;
+
+    // step 1: fast = slow
+    do{
+        slow = slow->Next;
+        fast = fast->Next->Next;
+    }
+    while(fast != slow);
+    //step 2: reinitialize of fast
+    fast = head;
+
+    //step3: fast->Next =slow->Next
+    while(fast->Next != slow->Next){
+        slow = slow->Next;
+        fast = fast->Next;
+    }
+    //step 4:
+    slow->Next = NULL;
+}
 int main(){
 
     Node* head = NULL;
@@ -327,6 +348,7 @@ int main(){
     << "Choice 14: Finding the mid (slow fast pointer method)"<<endl
     << "Choice 15: Make Cycle"<<endl
     << "Choice 16: Detect Cycle"<<endl
+    << "Choice 17: Remove a Cycle(if any)"<<endl
     << "Choice 0: Exit"<<endl;
     int choice = 2;
     while(choice != 0){
@@ -437,10 +459,19 @@ int main(){
             makeCycle(head, position);
             break;
         case 16:
-            int cycleStatus;
+            bool cycleStatus;
             cycleStatus = detectCycle(head);
-            if(true){
+            if(cycleStatus){
                 cout<<"There is a cycle in the list"<<endl;
+            } else {
+                cout<<"There is no cycle in the list"<<endl;
+            }
+            break;
+        case 17:
+            bool cycleStatus;
+            cycleStatus = detectCycle(head);
+            if(cycleStatus){
+                removeCycle(head);
             } else {
                 cout<<"There is no cycle in the list"<<endl;
             }
