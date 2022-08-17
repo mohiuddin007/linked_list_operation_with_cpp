@@ -263,6 +263,21 @@ Node* reverseRecursive(Node* &head){
     return newHead;
 }
 
+int findMid (Node* &head) {
+    //case 1: head empty 
+    if(head == NULL){
+        return -1;
+    }
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast != NULL && fast->Next != NULL){
+        slow = slow->Next;
+        fast = fast->Next->Next;
+    }
+    return slow->value;
+}
+
 int main(){
     Node* head = NULL;
     
@@ -280,6 +295,7 @@ int main(){
     << "Choice 11: Deletion Value(unique list)"<<endl
     << "Choice 12: Reverse a linked list (Non Recursive)"<<endl
     << "Choice 13: Reverse a linked list (Recursive)"<<endl
+    << "Choice 14: Finding the mid (slow fast pointer method)"<<endl
     << "Choice 0: Exit"<<endl;
     int choice = 2;
     while(choice != 0){
@@ -375,6 +391,14 @@ int main(){
         case 13:
             head = reverseRecursive(head);
             display(head);
+            break;
+        case 14:
+            int midVal;
+            midVal = findMid(head);
+            if(midVal == -1) 
+                cout<<"The LL is empty" <<endl;
+            else 
+                cout<<"mid value is: "<<midVal<<endl;
             break;
         default:
             break;
