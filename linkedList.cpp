@@ -278,8 +278,36 @@ int findMid (Node* &head) {
     return slow->value;
 }
 
+void makeCycle (Node* &head, int pos){
+    Node* temp = head;
+    Node* startNode;
+    int count = 1;
+
+    while(temp->Next != NULL){
+        if(count == pos) startNode == temp;
+        temp = temp->Next;
+        count++;
+    }
+
+    temp->Next = startNode;
+}
+
+bool detectCycle (Node* &head){
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast != NULL && fast->Next != NULL){
+        slow = slow->Next;
+        fast = fast->Next->Next;
+        if(slow->Next == fast->Next){
+            return true;
+        } 
+    }
+    return false;
+}
+
 int main(){
-    
+
     Node* head = NULL;
     
     int value, position;
@@ -297,6 +325,8 @@ int main(){
     << "Choice 12: Reverse a linked list (Non Recursive)"<<endl
     << "Choice 13: Reverse a linked list (Recursive)"<<endl
     << "Choice 14: Finding the mid (slow fast pointer method)"<<endl
+    << "Choice 15: Make Cycle"<<endl
+    << "Choice 16: Detect Cycle"<<endl
     << "Choice 0: Exit"<<endl;
     int choice = 2;
     while(choice != 0){
@@ -400,6 +430,20 @@ int main(){
                 cout<<"The LL is empty" <<endl;
             else 
                 cout<<"mid value is: "<<midVal<<endl;
+            break;
+        case 15:
+            cout<<"Enter the position to make cycle: "<<endl;
+            cin>>position;
+            makeCycle(head, position);
+            break;
+        case 16:
+            int cycleStatus;
+            cycleStatus = detectCycle(head);
+            if(true){
+                cout<<"There is a cycle in the list"<<endl;
+            } else {
+                cout<<"There is no cycle in the list"<<endl;
+            }
             break;
         default:
             break;
