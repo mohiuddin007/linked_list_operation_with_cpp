@@ -279,6 +279,7 @@ int findMid (Node* &head) {
 }
 
 int main(){
+    
     Node* head = NULL;
     
     int value, position;
